@@ -22,8 +22,13 @@ db.once('open', () => {
   console.log('mongoDB connected')
 })
 
+const exphbs = require('express-handlebars')
+
+app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
+app.set('view engine', 'hbs')
+
 app.get('/', (req, res) => {
-  res.send(`<h1>this is a to do list</h1>`)
+  res.render('index')
 })
 
 app.listen(port, () => {
