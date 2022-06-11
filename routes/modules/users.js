@@ -15,8 +15,12 @@ router.post(
 )
 
 router.get('/logout', (req, res) => {
-  req.logout()
-  res.redirect('/users/login')
+  req.logout(err => {
+    if (err) {
+      return next(err)
+    }
+    res.redirect('/users/login')
+  })
 })
 
 router.post('/register', (req, res) => {
